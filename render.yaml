@@ -1,0 +1,19 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: doon-imperial-erp
+    runtime: node
+    plan: free
+    region: ohio            # same region as the Neon database (us-east-2) for low latency
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /login
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: DATABASE_URL
+        sync: false         # paste the Neon connection string when Render asks
+      - key: AUTH_SECRET
+        generateValue: true # Render creates a strong random secret
+      - key: NEXT_PUBLIC_SHOW_DEMO_LOGINS
+        value: "true"       # shows demo accounts on the login page; set to "false" for real use
