@@ -34,10 +34,21 @@ index on the new `User.teacherId` column. The column starts empty, so no data is
 Every student and staff login email must end in `@doonimperial.com`; the admin forms and server actions reject anything else.
 The domain is set in `SCHOOL_DOMAIN` in `lib/format.ts`. Running the seed also renames any old `@doonimperial.edu.in` accounts.
 
+## Deploy on Render
+The repo includes `render.yaml` (a Render Blueprint).
+1. Push this folder to a GitHub repository.
+2. In Render: **New → Blueprint**, pick the repository, and paste your Neon `DATABASE_URL` when asked.
+   `AUTH_SECRET` is generated automatically.
+3. Render runs `npm ci && npm run build` (which also runs `prisma generate`) and starts with `npm start`.
+
+The database schema and demo data already live in Neon, so nothing else needs to run on Render.
+`NEXT_PUBLIC_SHOW_DEMO_LOGINS="true"` shows the demo accounts on the login page; set it to `"false"` and redeploy for real use.
+On the free plan the service sleeps after ~15 minutes idle, so the first visit afterwards takes about a minute.
+
 ## Design
 - Theme taken from the school crest: maroon `#7a1a28`, antique gold `#c49a45`, warm ivory background.
 - Fonts: Playfair Display (headings) and Inter (interface), loaded via `next/font`.
-- Tokens and components live in `app/globals.css`. Layouts adapt to phones (the sidebar becomes a slide-in menu).
+- Tokens and components live in `app/globals.css`. No sidebar: each dashboard's module tiles are the navigation, with a Dashboard button on inner pages. Layouts adapt to phones.
 
 ## Profile photos
 Photos are resized in the browser to a 360×360 JPEG (~30–60 KB) and stored in the `photo` column of `Student`/`Teacher`.
