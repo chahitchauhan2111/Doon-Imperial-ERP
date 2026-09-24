@@ -95,7 +95,7 @@ export default function Login() {
         </div>
       </section>
 
-      <div className="login-mark" aria-hidden="true">co. by designby2111</div>
+      <div className="login-mark" aria-hidden="true">@design_by_sora</div>
     </main>
   );
 }
