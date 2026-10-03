@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import {
   GraduationCap, Users, CalendarCheck, ClipboardList, IndianRupee, Wallet, BedDouble, DoorOpen, Megaphone,
-  UserCircle, BookOpenCheck, FolderOpen, type LucideIcon,
+  UserCircle, BookOpenCheck, FolderOpen, Trophy, type LucideIcon,
 } from 'lucide-react';
 import type { Role } from '@/lib/session';
 
@@ -25,7 +25,7 @@ export const MODULES: Record<Role, Tile[]> = {
     ['Attendance', '/student/attendance', CalendarCheck], ['Results', '/student/results', BookOpenCheck],
     ['Fees', '/student/fees', IndianRupee], ['Wallet', '/student/wallet', Wallet],
     ['Leave', '/student/leave', DoorOpen], ['Notices', '/student/notices', Megaphone],
-    ['Documents', '/student/documents', FolderOpen, true],
+    ['Credit Points', '/student/credits', Trophy], ['Documents', '/student/documents', FolderOpen, true],
   ],
 };
 

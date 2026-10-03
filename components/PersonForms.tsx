@@ -35,7 +35,7 @@ export function StudentForm({ s, photo }: { s?: StudentData; photo?: string }) {
         <F label="School email (login)" name="email" type="email" required defaultValue={v('email')} placeholder="firstname@doonimperial.com" pattern=".+@doonimperial\.com" title="Must be a @doonimperial.com school email" />
         <F label="Class" name="className" required><Select name="className" value={v('className')} options={CLASSES} /></F>
         <F label="Section" name="section" defaultValue={v('section')} placeholder="A" maxLength={3} />
-        <F label="Boarding no." name="boardingNo" required defaultValue={v('boardingNo')} placeholder="B-1001" />
+        <F label="Boarding no." name="boardingNo" required defaultValue={v('boardingNo')} placeholder="e.g. 1001" title="Must match the boarding number in the Credit Point Tracker" />
         <F label="Date of birth" name="dob" type="date" defaultValue={v('dob')} />
         <F label="Gender" name="gender"><Select name="gender" value={v('gender') || 'Male'} options={['Male', 'Female', 'Other']} /></F>
         <F label="Blood group" name="bloodGroup"><Select name="bloodGroup" value={v('bloodGroup')} options={BLOOD} /></F>
