@@ -89,3 +89,8 @@ ALTER TABLE "Mark" ADD CONSTRAINT "Mark_studentId_fkey" FOREIGN KEY ("studentId"
 
 -- Student documents (Google Drive folder link)
 ALTER TABLE "Student" ADD COLUMN IF NOT EXISTS "documentsUrl" TEXT;
+
+-- Boarding number (unique per student). Replaces the old per-class roll number, which the app no longer uses.
+-- Existing students start blank; the admin fills it in from each student's Edit page.
+ALTER TABLE "Student" ADD COLUMN IF NOT EXISTS "boardingNo" TEXT;
+CREATE UNIQUE INDEX IF NOT EXISTS "Student_boardingNo_key" ON "Student"("boardingNo");

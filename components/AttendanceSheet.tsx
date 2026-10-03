@@ -12,8 +12,8 @@ export default async function AttendanceSheet({ basePath, classes, cls, date }: 
   const students = cls
     ? await prisma.student.findMany({
         where: { ...classWhere(cls), status: 'ACTIVE' },
-        orderBy: [{ rollNo: 'asc' }, { name: 'asc' }],
-        select: { id: true, name: true, rollNo: true, admissionNo: true, updatedAt: true, attendances: { where: { date: dayStart(date) } } },
+        orderBy: [{ boardingNo: 'asc' }, { name: 'asc' }],
+        select: { id: true, name: true, boardingNo: true, admissionNo: true, updatedAt: true, attendances: { where: { date: dayStart(date) } } },
       })
     : [];
   const marked = students.filter(s => s.attendances.length).length;
@@ -45,13 +45,13 @@ export default async function AttendanceSheet({ basePath, classes, cls, date }: 
           <input type="hidden" name="back" value={`${basePath}?class=${encodeURIComponent(cls)}&date=${date}`} />
           <div className="table-wrap">
             <table className="table">
-              <thead><tr><th>Roll</th><th>Student</th><th>Status</th><th>Remark</th></tr></thead>
+              <thead><tr><th>Boarding no.</th><th>Student</th><th>Status</th><th>Remark</th></tr></thead>
               <tbody>
                 {students.map(s => {
                   const cur = s.attendances[0]?.status || 'PRESENT';
                   return (
                     <tr key={s.id}>
-                      <td className="num muted">{s.rollNo || '—'}</td>
+                      <td className="num muted">{s.boardingNo || '—'}</td>
                       <td><div className="person"><Avatar src={photoUrl('student', s.id, s.updatedAt)} name={s.name} size={34} /><div><b>{s.name}</b><small>{s.admissionNo}</small></div></div></td>
                       <td>
                         <div className="seg" role="radiogroup" aria-label={`Attendance for ${s.name}`}>

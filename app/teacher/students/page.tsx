@@ -12,7 +12,7 @@ export default async function TeacherStudents({ searchParams }: { searchParams: 
   const s = await requireRole('TEACHER');
   const [t, classes] = await Promise.all([prisma.teacher.findUnique({ where: { id: s.teacherId || '' }, select: { classTeacherOf: true } }), getClasses()]);
   const cls = q(searchParams, 'class') || t?.classTeacherOf || classes[0] || '';
-  const students = cls ? await prisma.student.findMany({ where: { ...classWhere(cls), status: 'ACTIVE' }, orderBy: [{ rollNo: 'asc' }, { name: 'asc' }] }) : [];
+  const students = cls ? await prisma.student.findMany({ where: { ...classWhere(cls), status: 'ACTIVE' }, orderBy: [{ boardingNo: 'asc' }, { name: 'asc' }] }) : [];
 
   return (
     <>
@@ -27,7 +27,7 @@ export default async function TeacherStudents({ searchParams }: { searchParams: 
           {students.map(st => (
             <Link key={st.id} href={`/teacher/students/${st.id}`} className="tile" style={{ padding: '20px 14px' }}>
               <Avatar src={photoUrl('student', st.id, st.updatedAt)} name={st.name} size={72} />
-              <div><div style={{ fontSize: 14 }}>{st.name}</div><div className="small muted" style={{ fontWeight: 500 }}>Roll {st.rollNo || '—'} · {st.admissionNo}</div></div>
+              <div><div style={{ fontSize: 14 }}>{st.name}</div><div className="small muted" style={{ fontWeight: 500 }}>Boarding no. {st.boardingNo || '—'} · {st.admissionNo}</div></div>
             </Link>
           ))}
         </div>

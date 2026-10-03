@@ -70,10 +70,10 @@ async function main() {
 
   const studentPw = await bcrypt.hash('Student@123', 12);
   const days = schoolDays(24);
-  for (const [admissionNo, name, className, section, rollNo, house, hostelBlock, room, bed, fatherName, motherName, bloodGroup, dob] of STUDENTS) {
+  for (const [admissionNo, name, className, section, , house, hostelBlock, room, bed, fatherName, motherName, bloodGroup, dob] of STUDENTS) {
     const email = name.split(' ')[0].toLowerCase() + '@doonimperial.com';
     const data = {
-      admissionNo, name, email, className, section, rollNo, house, hostelBlock, room, bed, fatherName, motherName, bloodGroup,
+      admissionNo, boardingNo: 'B-1' + admissionNo.slice(-3), name, email, className, section, house, hostelBlock, room, bed, fatherName, motherName, bloodGroup,
       dob: d(dob), gender: 'Male', parentName: fatherName, parentPhone: '98XXXXXX' + admissionNo.slice(-2), address: 'Dehradun, Uttarakhand',
     };
     const st = await prisma.student.upsert({ where: { admissionNo }, update: data, create: data });

@@ -17,8 +17,8 @@ export default async function MarksSheet({ basePath, classes, cls, exam, subject
   const students = cls
     ? await prisma.student.findMany({
         where: { ...classWhere(cls), status: 'ACTIVE' },
-        orderBy: [{ rollNo: 'asc' }, { name: 'asc' }],
-        select: { id: true, name: true, rollNo: true, admissionNo: true, updatedAt: true, marks: { where: { exam, subject } } },
+        orderBy: [{ boardingNo: 'asc' }, { name: 'asc' }],
+        select: { id: true, name: true, boardingNo: true, admissionNo: true, updatedAt: true, marks: { where: { exam, subject } } },
       })
     : [];
   const maxMarks = students.find(s => s.marks[0])?.marks[0].maxMarks || max;
@@ -42,13 +42,13 @@ export default async function MarksSheet({ basePath, classes, cls, exam, subject
           <input type="hidden" name="back" value={`${basePath}?class=${encodeURIComponent(cls)}&exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(subject)}&max=${maxMarks}`} />
           <div className="table-wrap">
             <table className="table">
-              <thead><tr><th>Roll</th><th>Student</th><th>Marks (out of {maxMarks})</th><th>Grade</th></tr></thead>
+              <thead><tr><th>Boarding no.</th><th>Student</th><th>Marks (out of {maxMarks})</th><th>Grade</th></tr></thead>
               <tbody>
                 {students.map(s => {
                   const m = s.marks[0];
                   return (
                     <tr key={s.id}>
-                      <td className="num muted">{s.rollNo || '—'}</td>
+                      <td className="num muted">{s.boardingNo || '—'}</td>
                       <td><div className="person"><Avatar src={photoUrl('student', s.id, s.updatedAt)} name={s.name} size={34} /><div><b>{s.name}</b><small>{s.admissionNo}</small></div></div></td>
                       <td><input className="input num" type="number" step="0.5" min={0} max={maxMarks} name={'m_' + s.id} defaultValue={m ? Number(m.marks) : ''} style={{ width: 110, height: 34 }} /></td>
                       <td>{m ? <span className="grade">{grade((Number(m.marks) / m.maxMarks) * 100)}</span> : <span className="muted small">—</span>}</td>

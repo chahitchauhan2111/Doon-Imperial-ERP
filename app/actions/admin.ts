@@ -26,7 +26,7 @@ export async function saveStudent(f: FormData) {
       name: need(str(f, 'name'), 'Name'),
       email,
       className: need(str(f, 'className'), 'Class'),
-      section: str(f, 'section'), rollNo: str(f, 'rollNo'), phone: str(f, 'phone'),
+      section: str(f, 'section'), boardingNo: need(str(f, 'boardingNo'), 'Boarding number'), phone: str(f, 'phone'),
       dob: dateOrNull(f, 'dob'), gender: str(f, 'gender'), bloodGroup: str(f, 'bloodGroup'),
       house: str(f, 'house'), hostelBlock: str(f, 'hostelBlock'), room: str(f, 'room'), bed: str(f, 'bed'),
       fatherName: str(f, 'fatherName'), motherName: str(f, 'motherName'), parentName: str(f, 'parentName'),

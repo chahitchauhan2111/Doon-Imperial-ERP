@@ -3,7 +3,7 @@ import { revalidatePath } from 'next/cache';
 
 export function errorText(e: unknown) {
   const code = (e as { code?: string })?.code;
-  if (code === 'P2002') return 'A record with the same ID or email already exists.';
+  if (code === 'P2002') return 'A record with the same ID, boarding no. or email already exists.';
   if (code === 'P2025') return 'Record not found.';
   if (e instanceof Error && !('code' in e)) return e.message;
   console.error(e);

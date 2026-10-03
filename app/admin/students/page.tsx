@@ -17,7 +17,7 @@ export default async function Students({ searchParams }: { searchParams: SP }) {
       where: {
         ...(cls && classWhere(cls)),
         ...(status !== 'ALL' && { status }),
-        ...(term && { OR: [{ name: { contains: term, mode: 'insensitive' } }, { admissionNo: { contains: term, mode: 'insensitive' } }, { email: { contains: term, mode: 'insensitive' } }] }),
+        ...(term && { OR: [{ name: { contains: term, mode: 'insensitive' } }, { admissionNo: { contains: term, mode: 'insensitive' } }, { boardingNo: { contains: term, mode: 'insensitive' } }, { email: { contains: term, mode: 'insensitive' } }] }),
       },
       orderBy: [{ className: 'asc' }, { section: 'asc' }, { name: 'asc' }],
     }),
@@ -44,12 +44,12 @@ export default async function Students({ searchParams }: { searchParams: SP }) {
         </form>
         {students.length ? (
           <div className="table-wrap"><table className="table">
-            <thead><tr><th>Student</th><th>Class</th><th>Roll</th><th>House</th><th>Hostel</th><th>Parent contact</th><th>Status</th></tr></thead>
+            <thead><tr><th>Student</th><th>Class</th><th>Boarding no.</th><th>House</th><th>Hostel</th><th>Parent contact</th><th>Status</th></tr></thead>
             <tbody>{students.map(s => (
               <tr key={s.id}>
                 <td><Link href={`/admin/students/${s.id}`} className="person"><Avatar src={photoUrl('student', s.id, s.updatedAt)} name={s.name} size={38} /><div><b>{s.name}</b><small>{s.admissionNo}</small></div></Link></td>
                 <td>{classLabel(s)}</td>
-                <td className="num">{s.rollNo || '—'}</td>
+                <td className="num">{s.boardingNo || '—'}</td>
                 <td>{s.house || '—'}</td>
                 <td>{s.hostelBlock ? `${s.hostelBlock}${s.room ? ' · ' + s.room : ''}` : '—'}</td>
                 <td>{s.parentPhone || '—'}<div className="small muted">{s.fatherName || s.parentName || ''}</div></td>

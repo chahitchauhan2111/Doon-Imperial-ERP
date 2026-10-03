@@ -29,7 +29,7 @@ function Card({ photo, name, id, email, phone, rows, footer }: {
 
 type StudentLike = {
   id: string; name: string; admissionNo: string; email: string; phone: string | null; className: string; section: string | null;
-  rollNo: string | null; dob: Date | null; gender: string | null; bloodGroup: string | null; fatherName: string | null; motherName: string | null;
+  boardingNo: string | null; dob: Date | null; gender: string | null; bloodGroup: string | null; fatherName: string | null; motherName: string | null;
   house: string | null; hostelBlock: string | null; room: string | null; bed: string | null; parentPhone: string | null; updatedAt: Date;
 };
 
@@ -37,7 +37,7 @@ export function StudentProfileCard({ s, footer }: { s: StudentLike; footer?: Rea
   return (
     <Card photo={photoUrl('student', s.id, s.updatedAt)} name={s.name} id={s.admissionNo} email={s.email} phone={s.phone} footer={footer}
       rows={[
-        ['Class', classLabel(s)], ['Roll No.', s.rollNo], ['Father’s Name', s.fatherName], ['Mother’s Name', s.motherName],
+        ['Class', classLabel(s)], ['Boarding No.', s.boardingNo], ['Father’s Name', s.fatherName], ['Mother’s Name', s.motherName],
         ['Date of Birth', s.dob ? fmtDate(s.dob) : null], ['Gender', s.gender], ['Blood Group', s.bloodGroup], ['House', s.house],
         ['Hostel', [s.hostelBlock, s.room && `Room ${s.room}`, s.bed && `Bed ${s.bed}`].filter(Boolean).join(' · ')],
         ['Parent Phone', s.parentPhone],

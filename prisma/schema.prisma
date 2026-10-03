@@ -47,7 +47,8 @@ model User {
 model Student {
   id             String         @id @default(cuid())
   admissionNo    String         @unique
-  rollNo         String?
+  // Unique boarding number assigned by the school (replaces the old per-class roll number)
+  boardingNo     String?        @unique
   name           String
   email          String         @unique
   phone          String?
