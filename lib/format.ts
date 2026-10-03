@@ -39,3 +39,13 @@ export function schoolEmail(email: string) {
   if (!e.endsWith(SCHOOL_DOMAIN) || e.length === SCHOOL_DOMAIN.length) throw new Error(`Email must be a school address ending in ${SCHOOL_DOMAIN}.`);
   return e;
 }
+
+/** Validates an optional Google Drive link (folder or file) pasted by the admin. */
+export function driveUrl(raw: string | null) {
+  if (!raw) return null;
+  let u: URL;
+  try { u = new URL(raw); } catch { throw new Error('Documents link must be a valid Google Drive URL.'); }
+  if (u.protocol !== 'https:' || !['drive.google.com', 'docs.google.com'].includes(u.hostname))
+    throw new Error('Documents link must be a Google Drive link (https://drive.google.com/...).');
+  return u.toString();
+}

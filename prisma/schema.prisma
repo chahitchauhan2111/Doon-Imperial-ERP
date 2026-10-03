@@ -68,6 +68,8 @@ model Student {
   address        String?
   // Profile photo stored as a small JPEG data URL (resized in the browser before upload)
   photo          String?
+  // Link to the student's Google Drive folder of documents (pasted by the admin)
+  documentsUrl   String?
   status         String         @default("ACTIVE")
   user           User?
   attendances    Attendance[]

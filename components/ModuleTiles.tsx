@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import {
   GraduationCap, Users, CalendarCheck, ClipboardList, IndianRupee, Wallet, BedDouble, DoorOpen, Megaphone,
-  UserCircle, BookOpenCheck, type LucideIcon,
+  UserCircle, BookOpenCheck, FolderOpen, type LucideIcon,
 } from 'lucide-react';
 import type { Role } from '@/lib/session';
 
-type Tile = [label: string, href: string, icon: LucideIcon];
+type Tile = [label: string, href: string, icon: LucideIcon, newTab?: boolean];
 
 /** The dashboard tiles are the main navigation for each portal (there is no sidebar). */
 export const MODULES: Record<Role, Tile[]> = {
@@ -25,13 +25,16 @@ export const MODULES: Record<Role, Tile[]> = {
     ['Attendance', '/student/attendance', CalendarCheck], ['Results', '/student/results', BookOpenCheck],
     ['Fees', '/student/fees', IndianRupee], ['Wallet', '/student/wallet', Wallet],
     ['Leave', '/student/leave', DoorOpen], ['Notices', '/student/notices', Megaphone],
+    ['Documents', '/student/documents', FolderOpen, true],
   ],
 };
 
 export default function ModuleTiles({ role }: { role: Role }) {
   return (
     <nav className="tiles" aria-label="Modules">
-      {MODULES[role].map(([label, href, Icon]) => <Link key={href} href={href} className="tile"><span><Icon /></span>{label}</Link>)}
+      {MODULES[role].map(([label, href, Icon, newTab]) => (
+        <Link key={href} href={href} className="tile" {...(newTab && { target: '_blank', rel: 'noopener noreferrer' })}><span><Icon /></span>{label}</Link>
+      ))}
     </nav>
   );
 }

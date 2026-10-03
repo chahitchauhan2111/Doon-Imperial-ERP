@@ -87,3 +87,5 @@ ALTER TABLE "User" ADD CONSTRAINT "User_teacherId_fkey" FOREIGN KEY ("teacherId"
 -- AddForeignKey
 ALTER TABLE "Mark" ADD CONSTRAINT "Mark_studentId_fkey" FOREIGN KEY ("studentId") REFERENCES "Student"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
+-- Student documents (Google Drive folder link)
+ALTER TABLE "Student" ADD COLUMN IF NOT EXISTS "documentsUrl" TEXT;

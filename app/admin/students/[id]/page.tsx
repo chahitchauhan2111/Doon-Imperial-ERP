@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, Trash2 } from 'lucide-react';
+import { ArrowLeft, Trash2, FolderOpen } from 'lucide-react';
 import { prisma } from '@/lib/prisma';
 import { photoUrl } from '@/lib/photo';
 import { classLabel } from '@/lib/format';
@@ -30,7 +30,13 @@ export default async function StudentDetail({ params, searchParams }: { params: 
 
       {tab === 'overview' ? (
         <div className="grid g-profile">
-          <StudentProfileCard s={s} />
+          <StudentProfileCard s={s} footer={
+            <div className="card-body">
+              {s.documentsUrl
+                ? <a href={s.documentsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ width: '100%' }}><FolderOpen />Documents</a>
+                : <Link href={`/admin/students/${s.id}?tab=edit`} className="small muted">No documents folder linked · add one</Link>}
+            </div>
+          } />
           <div><StudentInsights studentId={s.id} /></div>
         </div>
       ) : (

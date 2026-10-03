@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import { prisma } from '@/lib/prisma';
 import { requireRole } from '@/lib/auth';
 import { readPhoto } from '@/lib/photo';
-import { str, dateOrNull, schoolEmail } from '@/lib/format';
+import { str, dateOrNull, schoolEmail, driveUrl } from '@/lib/format';
 import { act, need } from './util';
 
 const password = async (f: FormData, required: boolean) => {
@@ -31,6 +31,7 @@ export async function saveStudent(f: FormData) {
       house: str(f, 'house'), hostelBlock: str(f, 'hostelBlock'), room: str(f, 'room'), bed: str(f, 'bed'),
       fatherName: str(f, 'fatherName'), motherName: str(f, 'motherName'), parentName: str(f, 'parentName'),
       parentPhone: str(f, 'parentPhone'), emergencyPhone: str(f, 'emergencyPhone'), address: str(f, 'address'),
+      documentsUrl: driveUrl(str(f, 'documentsUrl')),
       status: str(f, 'status') || 'ACTIVE',
       ...(photo !== undefined && { photo }),
     };

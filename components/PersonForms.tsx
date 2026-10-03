@@ -55,6 +55,10 @@ export function StudentForm({ s, photo }: { s?: StudentData; photo?: string }) {
         <F label="Hostel block" name="hostelBlock" defaultValue={v('hostelBlock')} placeholder="Boys Block A" />
         <F label="Room / Bed" name="room"><div style={{ display: 'flex', gap: 8 }}><input name="room" defaultValue={v('room')} placeholder="Room" /><input name="bed" defaultValue={v('bed')} placeholder="Bed" /></div></F>
 
+        <div className="form-section">Documents</div>
+        <F label="Google Drive folder link" name="documentsUrl" type="url" span defaultValue={v('documentsUrl')}
+          placeholder="https://drive.google.com/drive/folders/..." pattern="https://(drive|docs)\.google\.com/.+" title="Paste the link to this student’s Google Drive folder" />
+
         <div className="form-section">Login</div>
         <F label={s?.id ? 'Reset password (leave blank to keep)' : 'Initial password'} name="password" type="text" minLength={8} required={!s?.id} autoComplete="new-password" placeholder="Min. 8 characters" />
       </div>
